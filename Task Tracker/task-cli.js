@@ -11,3 +11,8 @@ function loadTasks(){
 }
 
 //save tasks
+function saveTasks(){
+    fs.writeFileSync(path, JSON.stringify(tasks, null, 2))
+}
+
+//Capture arguments
