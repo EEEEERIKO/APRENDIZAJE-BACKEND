@@ -1,4 +1,4 @@
-# 🚀 Learning Backend
+# 🚀 Backend Learning
 
 Welcome to my **Backend Learning Playground**! 🎉  
 This repository is a **collection of exercises, mini-projects, and full projects** that showcase my journey learning **backend development**.  
