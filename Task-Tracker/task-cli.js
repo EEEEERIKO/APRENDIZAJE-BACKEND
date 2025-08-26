@@ -112,9 +112,27 @@ switch (command) {
         saveTasks(tasksUpdate);
         console.log(`Tarea ${idToUpdate} actualizada correctamente`)
         break;
+    case 'delete':
+        const idToDelete = parseInt(args[1])
+        if(isNaN(idToDelete)){
+            consoole.log("Uso: delete <ID>")
+            break;
+        }
+
+        let tasksDelete = loadTasks();
+        const taskExist = tasksDelete.some(t => t.id === idToDelete);
+        if (!taskExist){
+            console.log(`La tare con ID: ${idToDelete} no existe`)
+            break;
+        }
+        tasksDelete = tasksDelete.filter(t => t.id !== idToDelete);
+        saveTasks(tasksDelete);
+        console.log(`Tarea ${idToDelete} ha sido eliminada correctamente`)
+
+        break;
     
     
-        default:
+    default:
         console.log('Comando no reconocido');
 
 }
