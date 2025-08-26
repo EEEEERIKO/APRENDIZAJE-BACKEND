@@ -6,6 +6,7 @@ function loadTasks(){
     if(!fs.existsSync(path)) {
         fs.writeFileSync(path, JSON.stringify([]));
     }
+
     const data = fs.readFileSync(path);
     return JSON.parse(data);
 }
@@ -42,7 +43,14 @@ switch(command){
         console.log(`Task added correctly (ID: ${newTask.id})`)
         break;
     case 'list':
-        console.log('Aquí listarás las tareas');
+        const task = loadTasks();
+        if(task.length === 0){
+            console.log("No hay tareas aún.")
+        } else{
+            task.forEach(task => {
+                console.log(`ID:${task.id} | ${task.description} | Estado : ${task.status}`)
+            })
+        }
         break;
     default:
         console.log('Comando no reconocido');

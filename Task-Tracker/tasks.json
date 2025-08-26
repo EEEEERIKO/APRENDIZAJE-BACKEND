@@ -2,7 +2,9 @@
   {
     "id": 1,
     "description": "Ir al gimnasio",
-    "status": "todo"
+    "status": "todo",
+    "createdAt": "2025-08-26T05:07:58.844Z",
+    "updatedAt": "2025-08-26T05:07:58.859Z"
   },
   {
     "id": 2,
