@@ -16,3 +16,15 @@ function saveTasks(){
 }
 
 //Capture arguments
+const args = process.argv.slice(2);
+const command = args[0]
+switch(command){
+    case 'add':
+        console.log('Aquí agregaras una terea');
+        brack;
+    case 'list':
+        console.log('Aquí listarás las tareas');
+        brack;
+    default:
+        console.log('Comando no reconocido');
+}
