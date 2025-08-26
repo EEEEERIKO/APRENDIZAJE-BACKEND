@@ -42,16 +42,26 @@ switch(command){
 
         console.log(`Task added correctly (ID: ${newTask.id})`)
         break;
+
     case 'list':
-        const task = loadTasks();
-        if(task.length === 0){
+        const tasksL = loadTasks();
+        const filter = args[1]
+        if(tasksL.length === 0){
             console.log("No hay tareas aún.")
         } else{
-            task.forEach(task => {
-                console.log(`ID:${task.id} | ${task.description} | Estado : ${task.status}`)
-            })
+            //if there is a filter, filter by states
+            const filteredTasks = filter ? tasksL.filter(t=> t.status === filter) : tasksL;
+
+            if(filteredTasks.length === 0){
+                console.log(`No existen tareas con el estado: ${filter}`)
+            }else{
+                filteredTasks.forEach(task => {
+                    console.log(`ID: ${task.id} | ${task.description} | Status: ${task.status} | Created at: ${task.createdAt}`)
+                })
+            }
         }
         break;
+
     case 'mark-done':
         const id = parseInt(args[1]);
         const lTasks = loadTasks();
