@@ -52,6 +52,35 @@ switch(command){
             })
         }
         break;
+    case 'mark-done':
+        const id = parseInt(args[1]);
+        const lTasks = loadTasks();
+        const lTask = lTasks.find(t => t.id === id)
+        if(lTask){
+            lTask.status = "done";
+            lTask.updatedAt = new Date().toISOString();
+            saveTasks(lTasks);
+            console.log(`Tarea ${id} ha sido marcada como hecha`)
+        }else{
+            console.log("tarea no enontrada")
+        }
+        break;
+
+     case 'mark-doing':
+        const idDone = parseInt(args[1]);
+        const lTasksDone = loadTasks();
+        const lTaskDone = lTasksDone.find(t => t.id === idDone)
+        if(lTaskDone){
+            lTaskDone.status = "doing";
+            lTaskDone.updatedAt = new Date().toISOString();
+            saveTasks(lTasksDone);
+            console.log(`Tarea ${idDone} ha sido marcada como en proceso`)
+        }else{
+            console.log("tarea no enontrada")
+        }
+        break;
+
     default:
         console.log('Comando no reconocido');
+    
 }

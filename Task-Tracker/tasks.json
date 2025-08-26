@@ -11,13 +11,13 @@
     "description": "Ir a la iglesia",
     "status": "todo",
     "createdAt": "2025-08-26T05:07:58.844Z",
-    "updatedAt": "2025-08-26T05:07:58.859Z"
+    "updatedAt": "2025-08-26T19:30:04.974Z"
   },
   {
     "id": 3,
     "description": "Entrenar baloncesto",
-    "status": "todo",
+    "status": "doing",
     "createdAt": "2025-08-26T05:09:34.684Z",
-    "updatedAt": "2025-08-26T05:09:34.685Z"
+    "updatedAt": "2025-08-26T19:33:39.574Z"
   }
 ]
