@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = './tasks.json';
 
 //read existing tasks
-function loadTasks(){
-    if(!fs.existsSync(path)) {
+function loadTasks() {
+    if (!fs.existsSync(path)) {
         fs.writeFileSync(path, JSON.stringify([]));
     }
 
@@ -12,17 +12,17 @@ function loadTasks(){
 }
 
 //save tasks
-function saveTasks(tasks){
+function saveTasks(tasks) {
     fs.writeFileSync(path, JSON.stringify(tasks, null, 2))
 }
 
 //Capture arguments
 const args = process.argv.slice(2);
 const command = args[0]
-switch(command){
+switch (command) {
     case 'add':
         const description = args.slice(1).join(" ")//take all the description
-        if(!description){
+        if (!description) {
             console.log('Please, text a description for the task')
         }
 
@@ -46,15 +46,15 @@ switch(command){
     case 'list':
         const tasksL = loadTasks();
         const filter = args[1]
-        if(tasksL.length === 0){
+        if (tasksL.length === 0) {
             console.log("No hay tareas aún.")
-        } else{
+        } else {
             //if there is a filter, filter by states
-            const filteredTasks = filter ? tasksL.filter(t=> t.status === filter) : tasksL;
+            const filteredTasks = filter ? tasksL.filter(t => t.status === filter) : tasksL;
 
-            if(filteredTasks.length === 0){
+            if (filteredTasks.length === 0) {
                 console.log(`No existen tareas con el estado: ${filter}`)
-            }else{
+            } else {
                 filteredTasks.forEach(task => {
                     console.log(`ID: ${task.id} | ${task.description} | Status: ${task.status} | Created at: ${task.createdAt}`)
                 })
@@ -66,31 +66,55 @@ switch(command){
         const id = parseInt(args[1]);
         const lTasks = loadTasks();
         const lTask = lTasks.find(t => t.id === id)
-        if(lTask){
+        if (lTask) {
             lTask.status = "done";
             lTask.updatedAt = new Date().toISOString();
             saveTasks(lTasks);
             console.log(`Tarea ${id} ha sido marcada como hecha`)
-        }else{
+        } else {
             console.log("tarea no enontrada")
         }
         break;
 
-     case 'mark-doing':
+    case 'mark-doing':
         const idDone = parseInt(args[1]);
         const lTasksDone = loadTasks();
         const lTaskDone = lTasksDone.find(t => t.id === idDone)
-        if(lTaskDone){
+        if (lTaskDone) {
             lTaskDone.status = "doing";
             lTaskDone.updatedAt = new Date().toISOString();
             saveTasks(lTasksDone);
             console.log(`Tarea ${idDone} ha sido marcada como en proceso`)
-        }else{
+        } else {
             console.log("tarea no enontrada")
         }
         break;
 
-    default:
-        console.log('Comando no reconocido');
+    case 'update':
+        const idToUpdate = parseInt(args[1]);
+        const newDescription = args.slice(2).join(" ");
+
+        if(isNaN(idToUpdate) || !newDescription) {
+            console.log("Uso: update <ID> <nueva descripcion>")
+            break;
+        }
+        const tasksUpdate = loadTasks();
+        const taskUpdate = tasksUpdate.find(t => t.id === idToUpdate)
+
+        if (!taskUpdate) {
+            console.log(`No se encontró la tarea con ID: ${idToUpdate}`)
+            break;
+        } 
+
+        taskUpdate.description = newDescription;
+        taskUpdate.updatedAt = new Date().toISOString();
+
+        saveTasks(tasksUpdate);
+        console.log(`Tarea ${idToUpdate} actualizada correctamente`)
+        break;
     
+    
+        default:
+        console.log('Comando no reconocido');
+
 }
