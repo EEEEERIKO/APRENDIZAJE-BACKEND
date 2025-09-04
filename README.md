@@ -54,6 +54,6 @@ Each time I complete one, I unlock new powers 💪 as a future full-stack develo
 Clone the repo and take a ride! 🎢  
 ```bash
 git clone https://github.com/EEEEERIKO/Backend-Learning.git
+---
 Thanks for stopping by! 🚀
 Happy coding & may your bugs be easy to fix! 🐞✨
----
